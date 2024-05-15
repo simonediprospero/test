@@ -14,21 +14,13 @@ import java.util.List;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
-    private DatabaseConnection dbConnection;
-
-    public void setDatabaseConnection(DatabaseConnection dbConnection) {
-        this.dbConnection = dbConnection;
-    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         try {
-            if (dbConnection == null) {
-                dbConnection = new DatabaseConnection();
-            }
-
+            DatabaseConnection dbConnection = new DatabaseConnection();
             Utente utente = dbConnection.autenticaUtente(username, password);
 
             if (utente != null) {
@@ -63,3 +55,4 @@ public class LoginServlet extends HttpServlet {
         request.getRequestDispatcher("/login_registrazione.jsp").forward(request, response);
     }
 }
+

@@ -16,18 +16,10 @@ import java.util.List;
 @WebServlet("/VisualizzaUtentiServlet")
 
 public class VisualizzaUtentiServlet extends HttpServlet {
-    private DatabaseConnection dbConnection;
-
-    public void setDatabaseConnection(DatabaseConnection dbConnection) {
-        this.dbConnection = dbConnection;
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            if (dbConnection == null) {
-                dbConnection = new DatabaseConnection();
-            }
+            DatabaseConnection dbConnection = new DatabaseConnection();
 
             List<Utente> listaUtenti = dbConnection.getUtenti(); // Ottieni tutti gli utenti dal database
             System.out.println("Lista Utenti: " + listaUtenti);
